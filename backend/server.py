@@ -44,7 +44,18 @@ def store_order():
     except Exception as e:
         print("Error processing order:", str(e))
         return jsonify({"error": f"Internal Server Error: {str(e)}"}), 500
-
+        
+@app.route("/test_db")
+def test_db():
+    try:
+        connection = get_sql_connection()
+        cursor = connection.cursor()
+        cursor.execute("SELECT 1")  
+        cursor.close()
+        connection.close()
+        return jsonify({"message": "Database connection successful!"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
 if __name__=="__main__":
     print("Starting flask server at port 5000")
     app.run(port=5000)
