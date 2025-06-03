@@ -115,7 +115,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetch("http://127.0.0.1:5000/getProducts")
+            fetch("https://grocers-store.onrender.com/getProducts")
                 .then(response => response.json())
                 .then(products => {
                     let productContainer = document.getElementById("product-list");
@@ -140,7 +140,7 @@
     let cart = [];
 
     document.addEventListener("DOMContentLoaded", function () {
-        fetch("http://127.0.0.1:5000/getProducts")
+        fetch("https://grocers-store.onrender.com/getProducts")
             .then(response => response.json())
             .then(products => {
                 let productContainer = document.getElementById("product-list");
@@ -309,7 +309,7 @@
         };
         let confirmCheckout = confirm(orderDetails + "\n\n✅ Proceed with this order?");
         if(confirmCheckout){
-            fetch("http://127.0.0.1:5000/storeOrder", {
+            fetch("https://grocers-store.onrender.com/storeOrder", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(orderData)
