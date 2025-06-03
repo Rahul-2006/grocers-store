@@ -14,6 +14,6 @@ def get_sql_connection():
             user=os.getenv("DB_USER"),
             password=os.getenv("DB_PASSWORD"),
             database=os.getenv("DB_NAME"),
-            ssl_disabled=False
-        )
+            port=int(os.getenv("DB_PORT", 18032)),
+            ssl_disabled=False)
         return __cnx
