@@ -47,15 +47,20 @@ def store_order():
         
 @app.route("/test_db")
 def test_db():
+    connection = get_sql_connection()
+    
+    if connection is None:
+        return jsonify({"error": "Failed to connect to Railway database!"})
+    
     try:
-        connection = get_sql_connection()
         cursor = connection.cursor()
-        cursor.execute("SELECT 1")  
+        cursor.execute("SELECT 1") 
         cursor.close()
         connection.close()
         return jsonify({"message": "Database connection successful!"})
     except Exception as e:
         return jsonify({"error": str(e)})
+
 if __name__=="__main__":
     print("Starting flask server at port 5000")
     app.run(port=5000)
