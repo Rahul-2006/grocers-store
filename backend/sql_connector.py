@@ -8,7 +8,8 @@ def get_sql_connection():
             user=os.getenv("DB_USER"),
             password=os.getenv("DB_PASSWORD"),
             database=os.getenv("DB_NAME"),
-            port=int(os.getenv("DB_PORT", 18032))
+            port=int(os.getenv("DB_PORT", 18032)),
+            buffered = True
         )
         print("✅ Database connection established successfully!") 
         return connection
