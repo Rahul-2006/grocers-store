@@ -42,6 +42,7 @@ def get_products():
 @app.route('/storeOrder', methods=['POST'])
 def store_order():
     try:
+        connection = get_sql_connection()
         data = request.json
         print("Received order data:", data) 
 
