@@ -94,7 +94,7 @@
         <div class="container">
             <h2 class="text-center fw-bold mb-4 ">Shopping Cart</h2>
             <ul id="cart-items" class="list-group"></ul>
-            <h3 class="mt-4">Total: $<span id="cart-total">0.00</span></h3>
+            <h3 class="mt-4">Total: ₹<span id="cart-total">0.00</span></h3>
             <button class="btn btn-success mt-3" onclick="finalizeOrder()">Checkout</button>
         </div>
     </section>
@@ -127,7 +127,7 @@
                         <div class="col-md-4 p-3">
                             <div class="product-card shadow-lg">
                                 <h3>${product.product_name}</h3>
-                                <p>${product.uom_name} - $${product.price_per_unit}</p>
+                                <p>${product.uom_name} - ₹${product.price_per_unit}</p>
                                 <button class="btn btn-primary" onclick="addToCart(${product.product_id}, '${product.product_name}', ${product.price_per_unit})">Add to Cart</button>
                             </div>
                         </div>`;
@@ -202,7 +202,7 @@
                 <button class="btn btn-sm btn-outline-secondary" onclick="decreaseQuantity(${item.productId})">➖</button> 
                 x${item.quantity} 
                 <button class="btn btn-sm btn-outline-secondary" onclick="increaseQuantity(${item.productId})">➕</button> 
-                - $${(item.price * item.quantity).toFixed(2)}
+                - ₹${(item.price * item.quantity).toFixed(2)}
                 <button class="btn btn-danger btn-sm" onclick="removeFromCart(${item.productId})">❌</button>
             </li>`;
         });
@@ -238,7 +238,7 @@
 
             summaryContainer.innerHTML += `
                 <li class="list-group-item d-flex justify-content-between">
-                    ${item.productName} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}
+                    ${item.productName} (x${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}
                 </li>`;
         });
         document.getElementById("order-total").textContent = totalPrice;
@@ -259,10 +259,10 @@
 
         let orderDetails = "🛒 Your Order Summary:\n\n";
         cart.forEach(item => {
-            orderDetails += `${item.productName} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
+            orderDetails += `${item.productName} (x${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}\n`;
         });
 
-        orderDetails += `\nTotal: $${orderTotal}`;
+        orderDetails += `\nTotal: ₹${orderTotal}`;
 
         let customerName = prompt("Enter your name for the order:");
         if (!customerName || customerName.trim() === "") {  
