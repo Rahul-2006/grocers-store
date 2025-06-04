@@ -22,18 +22,22 @@ def home():
 
 def get_products():
     try:
+    try:
         connection = get_sql_connection()
-        if connection is None:
-            return jsonify({"error": "Failed to connect to database"})
-
         cursor = connection.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM products")
-        products = cursor.fetchall()
         
+        cursor.execute("""
+            SELECT p.product_name, p.price_per_unit, u.uom_name 
+            FROM products p 
+            JOIN units_of_measure u ON p.uom_id = u.uom_id
+        """)
+        
+        products = cursor.fetchall()
         cursor.close()
         connection.close()
-        return jsonify(products)
-    except mysql.connector.Error as e:
+
+        return jsonify(products)  
+    except Exception as e:
         return jsonify({"error": str(e)})
 
 @app.route('/storeOrder', methods=['POST'])
