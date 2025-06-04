@@ -22,14 +22,13 @@ def home():
 
 def get_products():
     try:
-    try:
         connection = get_sql_connection()
         cursor = connection.cursor(dictionary=True)
         
         cursor.execute("""
-            SELECT p.product_name, p.price_per_unit, u.uom_name 
+            SELECT p.product_id, p.product_name, p.price_per_unit, p.uom_id,u.uom_name 
             FROM products p 
-            JOIN units_of_measure u ON p.uom_id = u.uom_id
+            JOIN uom u ON p.uom_id = u.uom_id
         """)
         
         products = cursor.fetchall()
