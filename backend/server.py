@@ -13,6 +13,11 @@ print("DB Host:", os.getenv("DB_HOST"))
 app = Flask(__name__)
 CORS(app)
 connection = get_sql_connection()
+
+@app.route("/")
+def home():
+    return "Welcome to Grocery Store API!"
+
 @app.route('/getProducts' , methods = ['GET'])
 
 def get_products():
