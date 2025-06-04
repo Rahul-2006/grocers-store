@@ -112,31 +112,7 @@
             <button class="btn btn-success mt-3" onclick="finalizeOrder()">Confirm Order</button>
         </div>
     </section>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch("https://grocers-store.onrender.com/getProducts")
-                .then(response => response.json())
-                .then(products => {
-                    let productContainer = document.getElementById("product-list");
-                    productContainer.innerHTML = "";
-        
-                    products.forEach(product => {
-                        let productCard = `
-                            <div class="col-md-4 p-4">
-                                <div class="product-card">
-                                    <h3>${product.product_name.charAt(0).toUpperCase() + product.product_name.slice(1).toLowerCase()}</h3>
-                                    <p>${product.uom_name.charAt(0).toUpperCase() + product.uom_name.slice(1).toLowerCase()} - $${product.price_per_unit}</p>
-                                    <button class="btn btn-primary">Add to Cart</button>
-                                </div>
-                            </div>`;
-                        productContainer.innerHTML += productCard;
-                    });
-                })
-                .catch(error => console.error("Error fetching products:", error));
-        });
-        </script>  
-        <script>
+<script>
     let cart = [];
 
     document.addEventListener("DOMContentLoaded", function () {
