@@ -21,10 +21,20 @@ def home():
 @app.route('/getProducts' , methods = ['GET'])
 
 def get_products():
-    products = products_dao.get_all_products(connection)
-    response = jsonify(products)
-    response.headers.add('Access-Control-Allow-Origin' , '*')
-    return response
+    try:
+        connection = get_sql_connection()
+        if connection is None:
+            return jsonify({"error": "Failed to connect to database"})
+
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM products")
+        products = cursor.fetchall()
+        
+        cursor.close()
+        connection.close()
+        return jsonify(products)
+    except mysql.connector.Error as e:
+        return jsonify({"error": str(e)})
 
 @app.route('/storeOrder', methods=['POST'])
 def store_order():
